@@ -1,14 +1,12 @@
-# This is a basic workflow to help you get started with Actions
-
 name: Jupyter
 
 # Controls when the workflow will run
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
-  push:
-    branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
+ # push:
+  #  branches: [ "main" ]
+ # pull_request:
+  #  branches: [ "main" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -24,20 +22,20 @@ jobs:
     steps:
       - name: Checkout # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
         uses: actions/checkout@v3
-      
+
       - name: Setup Python
         uses: actions/setup-python@v4.0.0
         with:
           cache: pip
           python-version: '3.7'
           
-      - name: Install Dependencies # Установка зависимостей для Jupyter
+      - name: Install Dependencies
         run: pip install -r requirements.txt
-        
-      - name: Exeute Notebook # Выполнение тетрадки Jupyter
+      
+      - name: Exeute Notebook
         run: jupyter-nbconvert --execute Homework1.ipynb --to html
         
-      - name: Upload a Build Artifact # Выгрузка вывода тетрадки (артефакта задания) в html файл
+      - name: Upload a Build Artifact
         uses: actions/upload-artifact@v3.1.0
         with:
           name: Artifact
